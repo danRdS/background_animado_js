@@ -1,0 +1,225 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+    color: #8f2c24;
+}
+
+body { background: #181818; }
+
+section {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+section .bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+section .byke {
+    position: absolute;
+    top: 40vh;
+    scale: .3;
+    pointer-events: none;
+    animation: animated-byke 10s linear infinite;
+}
+
+@keyframes animated-byke {
+    0% { transform: translateX(calc(-100% - 230vw));}
+    50% { transform: translateX(calc(100% + 230vw));}
+    50.01% { transform: translateX(calc(100% + 230vw)) rotateY(180deg);}
+    100% { transform: translateX(calc(-100% - 230vw)) rotateY(180deg);}
+}
+
+.login {
+    position: relative;
+    padding: 4vw;
+    background: rgba(255, 255, 255, .5);
+    backdrop-filter: blur(7px);
+    border-radius: 8px;
+    width: clamp(300px, 50vw, 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 4vh;
+    z-index: 10;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, .1);
+}
+
+.login h2 {
+    text-align: center;
+}
+
+.login input {
+    padding: 1.5vh 15px;
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    caret-color: #8f2c24;
+}
+
+.login input::placeholder { 
+    color: #8f2c24;
+}
+
+.login input:focus:not([type=submit]) { 
+    outline: none;
+    border: 2px solid #8f2c24;
+}
+
+.input_senha { position: relative; }
+
+.input_senha input {
+    padding-right: 2.5rem;
+}
+
+.login input::-ms-reveal { display: none; }
+
+.btn__olho {
+    display: none;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    bottom: 3px;
+    min-width: 2rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.input_senha:has(.btn__olho:focus) input {
+    border: 2px solid #8f2c24;
+}
+
+.input_senha input:not(:placeholder-shown) + .btn__olho {
+    display: block;
+}
+
+#btn {
+    background: #8f2c24;
+    border: none;
+    color: #e7e7e7;
+    cursor: pointer;
+}
+
+#btn:hover { background: #d64c42; }
+
+.group {
+    display: inherit;
+    justify-content: space-between;
+}
+
+a { font-weight: 500; }
+
+a::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background-color: #8f2c24;
+    transform: scaleX(0);
+    transition: transform 1s cubic-bezier(0, .7, .18, .56);
+}
+
+a:hover::after {
+    transform: scaleX(1);
+    transition: transform .4s cubic-bezier(1, 1, 1, 1);
+}
+
+.login :is(input, #btn, a) {
+    font-size: clamp(.9rem, 2vw, 1.05rem);
+}
+
+.login .barra {
+    position: absolute;
+    background: linear-gradient(to right bottom, rgba(255,255,255,.3), hsl(0, 0%, 100%));
+}
+
+.login .barra:nth-of-type(1) {
+    width: 100%;
+    height: 3px;
+    top: 0;
+    left: -100%;
+    border-radius: 1rem 1rem 0 0;
+    animation: barra1 2s linear infinite;
+}
+
+@keyframes barra1 {
+    50%, 100% { 
+        transform: translateX(200%);
+    }
+}
+
+.login .barra:nth-of-type(2) {
+    width: 3px;
+    height: 100%;
+    top: -100%;
+    right: 0;
+    border-radius: 0 1rem 1rem 0;
+    animation: barra2 2s linear infinite;
+    animation-delay: .5s;
+}
+
+@keyframes barra2 {
+    50%, 100% { 
+        transform: translateY(200%);
+    }
+}
+
+.login .barra:nth-of-type(3) {
+    width: 100%;
+    height: 3px;
+    bottom: 0;
+    right: -100%;
+    border-radius: 0 0 1rem 1rem;
+    animation: barra3 2s linear infinite;
+    animation-delay: 1s;
+}
+
+@keyframes barra3 {
+    50%, 100% { 
+        transform: translateX(-200%);
+    }
+}
+
+.login .barra:nth-of-type(4) {
+    width: 3px;
+    height: 100%;
+    left: 0;
+    bottom: -100%;
+    border-radius: 1rem 0 0 1rem;
+    animation: barra4 2s linear infinite;
+    animation-delay: 1.5s;
+}
+
+@keyframes barra4 {
+    50%, 100% { 
+        transform: translatey(-200%);
+    }
+}
+
+@media screen and (max-height: 420px) {
+    section .byke {
+        top: 8vh;
+        position: fixed;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    section .byke {
+        scale: .2;
+        animation-duration: 7s;
+    }
+}
